@@ -161,7 +161,12 @@ string getShowTime()
 class functions{
 public:
 
-BookingSystem cus;
+BookingSystem  bookingSysObj[20];
+const int movie_limit=20;
+int movie_stored=0;
+int current_place=0;
+
+
 //void bookTicket()
 //{
   //  display_list();
@@ -173,21 +178,103 @@ BookingSystem cus;
 
 void display_list()
 {
-    cout<<"--------------------------------------------------------------------------------------------------"<<endl;
-    cout<<"| Id  \t| Name                \t| Format\t| Show Date  \t | Show Time \t| Price\t | Seat  |"<<endl;
-    //cout<<"| "<<cus.getId()<< setw(10) <<"|"<<cus.getName()<<"\t| "<<cus.getFormat()<<"\t| "<<cus.getShowDate()<<"\t| "<<cus.getShowTime()<<"\t| "<<cus.getPrice()<<"\t| "<<cus.getSeat()<<"\t| "<<endl;
 
-    string NN="Sir jaleel";
-    printf("my name is %5s ", "saifullah");
+    cout<<"--------------------------------------------------------------------------------------------------"<<endl;
+ for(int x=0; x<20; x++)
+    {
+        if(bookingSysObj[x].getId()!=0)
+        {
+            cout<<"Movie Id        :  "<<bookingSysObj[x].getId()<<endl;
+            cout<<"Movie Name      :  "<<bookingSysObj[x].getName()<<endl;
+            cout<<"Movie Format    :  "<<bookingSysObj[x].getFormat()<<endl;
+            cout<<"Movie Show Date :  "<<bookingSysObj[x].getShowDate()<<endl;
+            cout<<"Movie Show Time :  "<<bookingSysObj[x].getShowTime()<<endl;
+            cout<<"Movie Price     :  "<<bookingSysObj[x].getMoviePrice()<<endl;
+            cout<<"Movie Seats     :  "<<bookingSysObj[x].getSeat()<<endl;
+        }
+    }
+
+    cout<<"-------------------------------------------------------------------------------------------------"<<endl;
 
 
 }   //END
+
+
+
+
+void addNewMovie()
+{                         ///This is Add new movie function:
+
+    if(movie_limit==movie_stored)
+   { cout<<endl<<"Sorry, New movie cannot be added"<<endl;
+    cout<<"Movie limit is full (20) "<<endl;
+    cout<<"Delete a movie, than try again .!!"<<endl<<endl; }
+
+    ///If list is not full add new movie than
+else
+{
+    cout<<"Dear User, You are going to add a new movies "<<endl;
+    cout<<"Please Enter Information about New Movie"<<endl;
+    cout<<"***********************************************"<<endl<<endl;
+
+
+    int nid;
+    cout<<"Enter the Id of new movie :  ";
+    cin>>nid;
+    bookingSysObj[current_place].setId(nid);
+
+
+    string nname;
+    cout<<"Enter the Name of New movie :  ";
+    cin>>nname;
+    bookingSysObj[current_place].setName(nname);
+
+    string nfor;
+    cout<<"Enter the Format of New movie (2D or 3D) :  ";
+    cin>>nfor;
+    bookingSysObj[current_place].setFormat(nfor);
+
+
+    string ntime;
+    cout<<"Enter the Time of New movie :  ";
+    cin>>ntime;
+    bookingSysObj[current_place].setShowTime(ntime);
+
+
+    string ndate;
+    cout<<"Enter the Date of New movie -->format(12/4/2000) :  ";
+    cin>>ndate;
+    bookingSysObj[current_place].setShowDate(ndate);
+
+
+    int nprice;
+    cout<<"Enter the Price of New movie :  ";
+    cin>>nprice;
+    bookingSysObj[current_place].setMoviePrice(nprice);
+
+
+    int nseat;
+    cout<<"Enter the Seats of New movie :  ";
+    cin>>nseat;
+    bookingSysObj[current_place].setSeat(nseat);
+
+    cout<<endl<<"Please wait ......."<<endl<<"New Movie Has been added successfully  "<<endl;
+
+    current_place++;
+    movie_stored++;
+
+}//else ENd
+
+}//End
+
+
 
 
 };
 int main()
 {
     functions f_Obj;
+    f_Obj.addNewMovie();
     f_Obj.display_list();
     return 0;
 }
